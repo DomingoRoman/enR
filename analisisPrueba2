@@ -1,0 +1,56 @@
+
+setwd("/Users/imac/Documents/2017/fonet_2o_Sem_2017/prueba2")
+
+a <- read.table("analiss_p2_r.txt", header = T)
+summary(a)
+hist(a[,3], main ="Verdadero o falso", col= "green")
+hist(a[,4], main ="Perfil", col= "green")
+hist(a[,5], main ="Audicion/Percepción", col= "green")
+hist(a[,6], main ="Banda ancha y estrecha", col= "green")
+hist(a[,7], main ="Relacion espectro -grama", col= "blue")
+hist(a[,9], main ="Completacion", col= "blue")
+hist(a[,10], main ="Identificar numero de fonemas", col= "red")
+hist(a[,11], main ="Onda sinusoidal", col= "orange")
+hist(a[,12], main ="rasgos del onda", col= "brown")
+hist(a[,12], main ="rasgos de onda", col= "brown")
+hist(a[,13], main ="rasgos de onda", col= "brown")
+hist(a[,15], main ="Resultados generales", col= "darkseagreen3")
+
+boxplot(a[,4],a[,5],a[,6], a[,7], a[,11], col = "darkseagreen3")
+
+boxplot(a[,3],a[,4],a[,5], a[,6], a[,7], a[,8],a[,9],a[,10],a[,11],a[,12],a[,13],a[,14],col = "darkseagreen3")
+
+hist(a[,14], main ="Resultado general", sub = "puntos", col= "darkseagreen2")
+
+
+par(mfrow=c(2,2))
+boxplot(a[,3],a[,4],a[,5], a[,6])
+boxplot(a[,7], a[,8],a[,9],a[,10])
+boxplot(a[,11],a[,12],a[,13],a[,14])
+hist(a[,15], main ="Resultados generales", col= "darkseagreen3")
+
+
+par(mfrow=c(2,2))
+
+hist(a[,3], col = "darkseagreen3", main = "V o F")
+hist(a[,4], col = "darkseagreen3", main = "Perfiles")
+hist(a[,5], col = "darkseagreen3", main = "Diferencia auditiva - perceptiva")
+hist(a[,6], col = "darkseagreen3", main = "Espectrograma ancho y estrecho")
+
+par(mfrow=c(2,2))
+
+hist(a[,7], col = "slategray3", main = "Espectro y espectrograma")
+hist(a[,9], col = "slategray3", main = "Completar espacios")
+hist(a[,10], col = "slategray3", main = "Contar fonemas")
+hist(a[,11], col = "slategray3", main = "Dibujar sinusoide con amplitud variable")
+
+
+par(mfrow=c(1,2))
+
+hist(a[,12], col = "peachpuff3 ", main = "Alternativa sobre onda compleja")
+hist(a[,13], col = "peachpuff3 ", main = "Identificar espectro")
+
+par(mfrow=c(1,1))
+b <- sort(a[,16])
+plot(b, main = "Todas las notas de la prueba 2")
+abline(h=4, col = "red")
