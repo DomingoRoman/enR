@@ -50,3 +50,6 @@ par(mfrow=c(1,3))
 plot(proms, ylim=c(1,7), type ="b", col = "green")
 plot(maxs, ylim=c(1,7), type ="b", col = "blue")
 plot(mins, ylim=c(1,7),type ="b", col ="red")
+# p1 = 41
+# p2 = 38
+# ctr1 = 31
