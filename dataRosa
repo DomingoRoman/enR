@@ -1,0 +1,46 @@
+setwd("/Users/historiadores/Documents/Domingo/Rosa")
+
+a <-read.table("rosa_2018_seg_tab.txt", header=T)
+
+summary(a)
+
+a[a$T=='PAA',]$O->p_oclus
+a[a$T=='PAA',]$F->p_fric
+
+a[a$T=='REA',]$O->r_oclus
+a[a$T=='REA',]$F->r_fric
+
+a[a$T=='LAL',]$O->l_oclus
+a[a$T=='LAL',]$F->l_fric
+
+a[a$T=='FRI',]$O->f_oclus
+a[a$T=='FRI',]$F->f_fric
+
+par(mfrow=c(1,3))
+boxplot(p_oclus,p_fric, main ="Posalveoloapical", col = "red")
+boxplot(r_oclus,r_fric,  main ="Retrofleja africada", col = "blue")
+boxplot(l_oclus,l_fric, main ="Laminoalveolar", col = "green")
+
+par(mfrow=c(1,2))
+hist(p_oclus, col = "red", main = "Posalveoloapical (oclu.)")
+hist(p_fric, col = "blue",main = "Posalveoloapical (fricc.)")
+
+par(mfrow=c(1,2))
+hist(r_oclus, col = "red", main = "Retrofleja africada (oclu.)")
+hist(r_fric, col = "blue", main = "Retrofleja africada (fricc.)")
+
+par(mfrow=c(1,2))
+hist(l_oclus, col = "red", main = "Laminoalveolar (oclu.)")
+hist(l_fric, col = "blue", main = "Laminoalveolar (fricc.)")
+
+par(mfrow=c(1,1))
+# rango <- range(50,f_fric,f_oclus)
+
+# se resuelve etiquetas eje X
+
+promedios <- c(mean(p_fric), mean(r_fric), mean(l_fric), mean(f_fric))
+
+plot(promedios, type = "b",xlab= "Variantes", ylab="Porcentaje de friccion", col = "red", frame = T, col.main="blue", axes=F, ann =FALSE,ylim=c(40,100))
+axis(1, at=1:4, lab=c("Posalveoloapical", "Retrofleja africada", "Laminoalveolar", "Fricativa"))
+axis(2, las=1,ylim=c(40,100))
+title(main="Porcentaje de duracion de la friccion en las cuatro variantes")
