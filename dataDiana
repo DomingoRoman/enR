@@ -1,0 +1,64 @@
+
+install.packages("readr")
+library("readr")
+
+
+
+a <- read.csv2("data.csv")
+
+arica  <- subset(a, loca =="Arica")
+stgo  <- subset(a, loca =="Santiago")
+
+
+arica_enun <- subset(arica, X...modo =="enun")
+arica_inte <- subset(arica, X...modo =="inte")
+arica_enun_aa <- subset(arica_enun, comb == "aa")
+arica_enun_gg <- subset(arica_enun, comb == "gg")
+arica_enun_ee <- subset(arica_enun, comb == "ee")
+arica_inte_aa <- subset(arica_inte, comb == "aa")
+arica_inte_gg <- subset(arica_inte, comb == "gg")
+arica_inte_ee <- subset(arica_inte, comb == "ee")
+
+stgo_enun <- subset(stgo, X...modo =="enun")
+stgo_inte <- subset(stgo, X...modo =="inte")
+stgo_enun_aa <- subset(stgo_enun, comb == "aa")
+stgo_enun_gg <- subset(stgo_enun, comb == "gg")
+stgo_enun_ee <- subset(stgo_enun, comb == "ee")
+stgo_inte_aa <- subset(stgo_inte, comb == "aa")
+stgo_inte_gg <- subset(stgo_inte, comb == "gg")
+stgo_inte_ee <- subset(stgo_inte, comb == "ee")
+
+
+
+
+#########
+
+#########
+
+# axis(x= NULL, at=NULL, lab=c("el", "co", "ra", "zon", "se", "cui","da","co","nob","se","sion","fn")))
+
+
+
+plot(arica_enun_ee[,6], type = "overplotted", col = "red", ylim=c(0,300),ylab="Hz",xlab="Posicion", main="Interrogativas y enunciativas esdru-esdru, Arica")
+par(new=T)
+plot(arica_inte_ee[,6], type = "overplotted", col = "blue",  ylim=c(0,300),ylab=" ", xlab ="")
+
+plot(arica_enun_aa[,6], type = "overplotted", col = "red", ylim=c(0,300),ylab="Hz",xlab="Posicion", main="Interrogativas y enunciativas aguda-aguda, Arica")
+par(new=T)
+plot(arica_inte_aa[,6], type = "overplotted", col = "blue",  ylim=c(0,300),ylab=" ", xlab ="")
+
+plot(arica_enun_gg[,6], type = "overplotted", col = "red", ylim=c(0,300),ylab="Hz",xlab="Posicion", main="Interrogativas y enunciativas grave-grave, Arica")
+par(new=T)
+plot(arica_inte_gg[,6], type = "overplotted", col = "blue",  ylim=c(0,300),ylab=" ", xlab ="")
+
+plot(stgo_enun_ee[,6], type = "overplotted", col = "red", ylim=c(0,300),ylab="Hz",xlab="Posicion", main="Interrogativas y enunciativas esdru-esdru, Santiago")
+par(new=T)
+plot(stgo_inte_ee[,6], type = "overplotted", col = "blue",  ylim=c(0,300),ylab=" ", xlab ="")
+
+plot(stgo_enun_aa[,6], type = "overplotted", col = "red", ylim=c(0,300),ylab="Hz",xlab="Posicion", main="Interrogativas y enunciativas aguda-aguda, Santiago")
+par(new=T)
+plot(stgo_inte_aa[,6], type = "overplotted", col = "blue",  ylim=c(0,300),ylab=" ", xlab ="")
+
+plot(stgo_enun_gg[,6], type = "overplotted", col = "red", ylim=c(0,300),ylab="Hz",xlab="Posicion", main="Interrogativas y enunciativas grave-grave, Santiago")
+par(new=T)
+plot(arica_inte_gg[,6], type = "overplotted", col = "blue",  ylim=c(0,300),ylab=" ", xlab ="")
