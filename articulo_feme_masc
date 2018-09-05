@@ -22,7 +22,7 @@ nmas1 <- nrow(mas1)
 nmas0 <- nrow(mas0)
 
 #####
-
+png('articulo_genero_01.png')
 par(mfrow=c(1,2))
 barplot(c(nfem1,nfem0), ylim=c(0,25), axes =FALSE, main="Nombres femeninos", col=c("grey48","grey91"))
 axis(1, at=1:2, lab=c("Con art.", "Sin art."))
@@ -35,12 +35,16 @@ axis(1, at=1:2, lab=c("Con art.", "Sin art."))
 axis(4, seq(0,25,5))
 abline(h=seq(0,25,5), lty=3, col= "grey")
 box()
+dev.off()
 
 valores_f <- c(nfem1,nfem0)
 valores_m <- c(nmas1,nmas0)
 
+png('articulo_genero_02.png')
 par(mfrow=c(1,1))
 plot(valores_f,type="o",lty=2, col="red",axes =FALSE,ylim=c(0,25), xlab="",ylab="")
+legend(1.73, 25, legend=c("Nombres femeninos", "Nombres masculinos"), col=c("red", "blue"), lty=2:2, cex=0.7)
+
 axis(2, seq(0,25,5))
 abline(h=seq(0,25,5), lty=3, col= "grey")
 
@@ -50,9 +54,6 @@ plot(valores_m,type="o",lty=2, col="blue",axes =FALSE,ylim=c(0,25), xlab="",ylab
 axis(1, at=1:2, lab=c("Con art.", "Sin art."))
 box()
 
-title(main ="Uso y no uso de articulo")
+title(main ="Nombres (por sexo) con y sin articulo ")
 
-
-
-
-
+dev.off()
