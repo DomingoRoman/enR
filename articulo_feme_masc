@@ -1,35 +1,78 @@
 setwd("/Users/historiadores/Documents/Domingo/2018/usoArticulo")
+
 getwd()
+
 a <- read.csv("data_3_sept.csv")
+
 a
+
 fem <- subset(a,sex=="f")
+
 mas <- subset(a,sex=="m")
 
+
+
+
 fem1 <-subset(fem,uso=="1")
+
 fem0 <-subset(fem,uso=="0")
+
 mas1 <-subset(mas,uso=="1")
+
 mas0 <-subset(mas,uso=="0")
 
+
+
+
 nfem1 <- nrow(fem1)
+
 nfem0 <- nrow(fem0)
+
 nmas1 <- nrow(mas1)
+
 nmas0 <- nrow(mas0)
 
+
+
+
 nmas0
+
 nmas1
-barplot(c(nfem1,nfem0,nmas1,nmas0), axes =FALSE,ylim=c(0,25), main="Nombres con y sin articulo")
-axis(1, at=1:4, lab=c("feme. con", "feme. sin", "masc. con", "masc. sin"))
-abline(v=2.5)
+
+
+#####
+
+par(mfrow=c(1,2))
+
+barplot(c(nfem1,nfem0), ylim=c(0,25), axes =FALSE, main="Nombres femeninos", col="orchid2")
+axis(1, at=1:2, lab=c("Con art.", "Sin art."))
+axis(2, at=1:25, cex.axis=0.7)
 box()
+
+barplot(c(nmas1,nmas0), axes =FALSE,ylim=c(0,25), main="Nombres masculinos", col= "royalblue2")
+axis(1, at=1:2, lab=c("Con art.", "Sin art."))
+axis(4, at=1:25, cex.axis=0.7)
+box()
+
 
 
 valores_f <- c(nfem1,nfem0)
+
 valores_m <- c(nmas1,nmas0)
 
+
+
+par(mfrow=c(1,1))
 plot(valores_f,type="o",lty=2, col="red",axes =FALSE,ylim=c(0,25), xlab="",ylab="")
+
 par(new=T)
+
 plot(valores_m,type="o",lty=2, col="blue",axes =FALSE,ylim=c(0,25), xlab="",ylab="")
+
 axis(1, at=1:2, lab=c("Con art.", "Sin art."))
+
 box()
+
 title(main ="Uso y no uso de articulo")
+
 legend(1, 25, c("femeninos", "masculinos"), cex=0.8, col=c("red", "blue"),pch=21:21, lty=2:2)
