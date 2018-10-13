@@ -8,18 +8,18 @@ masc <- subset(data, sex =="h")
 x_feme <- mean(feme[,2])
 x_masc <- mean(masc[,2])
 xs <- c(x_masc,x_feme)
-
-boxplot(masc[,2], feme[,2], main ="Velocidad (f/seg) hombres y mujeres", col = "grey95")
+par(mfrow=c(1,1))
+boxplot(masc[,2], feme[,2], main ="Velocidad (f/seg) hombres y mujeres", col = "grey95", xlab="sexo",xaxt="n")
+axis(1, at = c(1:2), cex.axis=1)
 par(new=T)
 points((xs), col ="blue",type="o", lty=2, pch="X")
 
-# Histogramas respectivos
+hombres <- masc[,2]
+mujeres <- feme[,2]
+
 par(mfrow=c(1,2))
-hist(masc[,2], col = "blue", main = "Hist. velocidad hombres")
-hist(feme[,2], col = "pink", main = "Hist. velocidad mujeres")
+hist(hombres, col = "blue", main = "Hist. velocidad hombres", ylim=c(1,8))
+abline(v=x_masc, lty=2)
 
-par(mfrow=c(1,1))
-
-
-x_feme
-x_masc
+hist(mujeres, col = "pink", main = "Hist. velocidad mujeres", ylim=c(1,8))
+abline(v=x_feme, lty=2)
