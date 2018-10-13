@@ -13,8 +13,13 @@ boxplot(masc[,2], feme[,2], main ="Velocidad (f/seg) hombres y mujeres", col = "
 par(new=T)
 points((xs), col ="blue",type="o", lty=2, pch="X")
 
-hist(feme[,2])
-hist(masc[,2])
+# Histogramas respectivos
+par(mfrow=c(1,2))
+hist(masc[,2], col = "blue", main = "Hist. velocidad hombres")
+hist(feme[,2], col = "pink", main = "Hist. velocidad mujeres")
+
+par(mfrow=c(1,1))
+
 
 x_feme
 x_masc
