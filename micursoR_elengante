@@ -1,0 +1,54 @@
+# En R
+# Lee datos de la web
+data <- read.csv("http://domingo-roman.net/velocidad.csv")
+str(data)
+# obtiene los dos grupos 
+femina <- data[data$sex=="f",]
+machit <- data[data$sex=="h",]
+
+x_feme <- mean(femina[,2])
+x_masc <- mean(machit[,2])
+
+xs <- c(x_masc,x_feme)
+# Gráficos:
+## 1. Boxplot para ambos grupos. Incluye la marca del promedio y una línea
+##   que une cada uno de los promedios
+
+par(mfrow=c(1,1))
+boxplot(masc[,2], feme[,2], main ="Velocidad (fonemas/segundo)", col = c("grey44","grey87"), xlab="Sexo",ylab="Fonemas/seg",xaxt="n")
+axis(1, at = c(1:2), cex.axis=1, labels=c("Hombres", "Mujeres"))
+par(new=T)
+points((xs), col ="blue",type="o", lty=2, lwd= 0.4, pch="X")
+
+# Pausar aquí
+####################################
+# Continuar desde aquí
+
+
+# Gráficos:
+## 2. Histogramas de ambos grupos
+
+par(mfrow=c(1,2))
+hist(hombres, col = "grey44", ylim=c(1,8), main="", ylab="Frecuencia")
+abline(v=x_masc, lty=2)
+box()
+
+hist(mujeres, col = "grey87", ylim=c(1,8), main="", yaxt="n", ylab="")
+axis(side=4)
+abline(v=x_feme, lty=2)
+box()
+mtext("Histogramas de velocidad de habla", font=2,side = 3, line = -3, outer = TRUE)
+
+
+# tamaño muestral = 40
+# variable cualitativa nominal sexo = 20 hombres, 20 mujeres
+# variable cuantitativa continua: velocidad en fonemas por segundo
+
+# La duración se ve afectada por (dependiente) la variable sexo (independiente).
+# Variable dependiente: velocidad de habla expresada en sílabas por segundo
+# Variable independiente: sexo
+
+# t.test
+ttest = t.test (hombres,mujeres)
+names(ttest)
+ttest$statistic
