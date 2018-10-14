@@ -1,5 +1,3 @@
-# Datos tomados de vocales repetidas
-
 data <- read.csv("http://domingo-roman.net/velocidad.csv")
 
 feme <- subset(data, sex=="f")
@@ -30,3 +28,10 @@ hist(mujeres, col = "grey87", main = "Hist. velocidad mujeres", ylim=c(1,8))
 abline(v=x_feme, lty=2)
 #mtext("X",3,0)
 box()
+
+
+# t.test
+ttest = t.test (hombres,mujeres)
+names(ttest)
+ttest$statistic
+
