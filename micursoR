@@ -26,10 +26,11 @@ hist(hombres, col = "grey44", ylim=c(1,8), main="", ylab="Frecuencia")
 abline(v=x_masc, lty=2)
 box()
 
-hist(mujeres, col = "grey87", ylim=c(1,8), main="", ylab="")
+hist(mujeres, col = "grey87", ylim=c(1,8), main="", yaxt="n", ylab="")
+axis(side=4)
 abline(v=x_feme, lty=2)
 box()
-mtext("Histogramas de velocidad de habla", side = 3, line = -3, outer = TRUE)
+mtext("Histogramas de velocidad de habla", font=2,side = 3, line = -3, outer = TRUE)
 # tamaño muestral = 40
 # variable cualitativa nominal sexo = 20 hombres, 20 mujeres
 # variable cunatitativa continua: velocidad en fonemas por segundo
