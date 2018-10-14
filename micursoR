@@ -5,21 +5,28 @@ data <- read.csv("http://domingo-roman.net/velocidad.csv")
 feme <- subset(data, sex=="f")
 masc <- subset(data, sex =="h")
 
-x_feme <- mean(feme[,2])
-x_masc <- mean(masc[,2])
-xs <- c(x_masc,x_feme)
-par(mfrow=c(1,1))
-boxplot(masc[,2], feme[,2], main ="Velocidad (f/seg) hombres y mujeres", col = "grey95", xlab="sexo",xaxt="n")
-axis(1, at = c(1:2), cex.axis=1)
-par(new=T)
-points((xs), col ="blue",type="o", lty=2, pch="X")
-
 hombres <- masc[,2]
 mujeres <- feme[,2]
 
-par(mfrow=c(1,2))
-hist(hombres, col = "blue", main = "Hist. velocidad hombres", ylim=c(1,8))
-abline(v=x_masc, lty=2)
+x_feme <- mean(mujeres)
+x_masc <- mean(hombres)
 
-hist(mujeres, col = "pink", main = "Hist. velocidad mujeres", ylim=c(1,8))
+xs <- c(x_masc,x_feme)
+
+par(mfrow=c(1,1))
+boxplot(masc[,2], feme[,2], main ="Velocidad (fonemas/segundo)", col = "grey95", xlab="sexo",xaxt="n")
+axis(1, at = c(1:2), cex.axis=1, labels=c("Hombres", "Mujeres"))
+par(new=T)
+points((xs), col ="blue",type="o", lty=2, lwd= 0.4, pch="X")
+
+
+par(mfrow=c(1,2))
+hist(hombres, col = "grey44", main = "Hist. velocidad hombres", ylim=c(1,8))
+abline(v=x_masc, lty=2)
+text("X",13,6)
+box()
+
+hist(mujeres, col = "grey87", main = "Hist. velocidad mujeres", ylim=c(1,8))
 abline(v=x_feme, lty=2)
+#mtext("X",3,0)
+box()
