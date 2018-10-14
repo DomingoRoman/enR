@@ -12,26 +12,29 @@ x_masc <- mean(hombres)
 xs <- c(x_masc,x_feme)
 
 par(mfrow=c(1,1))
-boxplot(masc[,2], feme[,2], main ="Velocidad (fonemas/segundo)", col = "grey95", xlab="sexo",xaxt="n")
+boxplot(masc[,2], feme[,2], main ="Velocidad (fonemas/segundo)", col = c("grey44","grey87"), xlab="sexo",ylab="Fonemas/seg",xaxt="n")
 axis(1, at = c(1:2), cex.axis=1, labels=c("Hombres", "Mujeres"))
 par(new=T)
 points((xs), col ="blue",type="o", lty=2, lwd= 0.4, pch="X")
 
+# Pausar aquí
+####################################
+# Continuar desde aquí
 
 par(mfrow=c(1,2))
-hist(hombres, col = "grey44", main = "Hist. velocidad hombres", ylim=c(1,8))
+hist(hombres, col = "grey44", ylim=c(1,8), main="", ylab="Frecuencia")
 abline(v=x_masc, lty=2)
-text("X",13,6)
 box()
 
-hist(mujeres, col = "grey87", main = "Hist. velocidad mujeres", ylim=c(1,8))
+hist(mujeres, col = "grey87", ylim=c(1,8), main="", ylab="")
 abline(v=x_feme, lty=2)
-#mtext("X",3,0)
 box()
-
+mtext("Histogramas de velocidad de habla", side = 3, line = -3, outer = TRUE)
+# tamaño muestral = 40
+# variable cualitativa nominal sexo = 20 hombres, 20 mujeres
+# variable cunatitativa continua: velocidad en fonemas por segundo
 
 # t.test
 ttest = t.test (hombres,mujeres)
 names(ttest)
 ttest$statistic
-
