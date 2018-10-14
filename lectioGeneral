@@ -1,0 +1,8 @@
+# crear objeto
+
+# determinar la clase y la estructura
+
+str(data)
+
+dividir el dataframe 
+nuevobjeto <- data[data$variable == "edad",]
