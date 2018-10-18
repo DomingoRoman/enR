@@ -1,21 +1,52 @@
 # En R
+
 # Lee datos de la web
+
 data <- read.csv("http://domingo-roman.net/velocidad.csv")
+ndatos <- nrow(data)
+x_datos <- mean(data[,2])
+desv <- sd(data[,2])
 str(data)
+
 # obtiene los dos grupos 
+
 femina <- data[data$sex=="f",]
+n_femina <- nrow(femina)
 machit <- data[data$sex=="h",]
+n_machit <- nrow(machit)
+
 
 x_feme <- mean(femina[,2])
 x_masc <- mean(machit[,2])
 
+desv_machit <- sd(machit[,2])
+desv_femina <- sd(femina[,2])
 xs <- c(x_masc,x_feme)
+
 # Gráficos:
-## 1. Boxplot para ambos grupos. Incluye la marca del promedio y una línea
-##   que une cada uno de los promedios
+
+
+# 0- Histograma de los dos grupos
+
 
 par(mfrow=c(1,1))
-boxplot(masc[,2], feme[,2], main ="Velocidad (fonemas/segundo)", col = c("grey44","grey87"), xlab="Sexo",ylab="Fonemas/seg",xaxt="n")
+
+x=rnorm(ndatos,x_datos,desv )
+hist(data[,2], freq=FALSE, xlim=c(10,18), ylim=c(0,0.3), col ="palegoldenrod", ylab="",xlab="", main="Histograma de velocidad y distribucion normal")
+plot(function(x)dnorm(x,x_datos,desv), 10,18, add=TRUE, col="blue")
+abline(v=x_datos, col ="red")
+box()
+
+
+
+
+
+
+## 1. Boxplot para ambos grupos. Incluye la marca del promedio y una línea
+## que une cada uno de los promedios
+
+par(mfrow=c(1,1))
+boxplot(machit[,2], femina[,2], main ="Velocidad (fonemas/segundo)", col = c("grey44","grey87"), xlab="Sexo",ylab="Fonemas/seg",xaxt="n")
 axis(1, at = c(1:2), cex.axis=1, labels=c("Hombres", "Mujeres"))
 par(new=T)
 points((xs), col ="blue",type="o", lty=2, lwd= 0.4, pch="X")
@@ -25,30 +56,85 @@ points((xs), col ="blue",type="o", lty=2, lwd= 0.4, pch="X")
 # Continuar desde aquí
 
 
-# Gráficos:
-## 2. Histogramas de ambos grupos
+## 2. Histogramas de los dos grupos (separados)
 
 par(mfrow=c(1,2))
-hist(hombres, col = "grey44", ylim=c(1,8), main="", ylab="Frecuencia")
+
+distr_machit=rnorm(n_machit,x_masc,desv_machit )
+hist(machit[,2], col = "grey44", ylim=c(1,8), main="", ylab="Frecuencia", xlab="Hombres")
+abline(v=x_masc, lty=2)
+machit_norm=rnorm(machit,x_datos,desv )
+plot(function(distr_machit)dnorm(distr_machit,x_masc,desv_machit), 10,18, add=TRUE, col="red")
+box()
+
+
+distr_femina=rnorm(n_femina,x_feme,desv_femina )
+hist(femina[,2], col = "grey87", ylim=c(1,8), main="", yaxt="n", ylab="", xlab="Mujeres")
+axis(side=4)
+plot(function(distr_femina)dnorm(distr_femina,x_feme,desv_femina), 10,18, add=TRUE, col="red")
+abline(v=x_feme, lty=2)
+box()
+
+mtext("Histogramas de velocidad de habla", font=2,side = 3, line = -3, outer = TRUE)
+
+
+
+
+## 2.1 Histogramas de los dos grupos (separados) con curva de densidad real
+par(mfrow=c(1,2))
+hist(machit[,2], col = "grey44", main="", ylab="Frecuencia", xlab="Hombres", freq=FALSE)
+lines(density(machit[,2]),col="blue",lwd=2, ylim=c(0,0.3), lty="dotted")
 abline(v=x_masc, lty=2)
 box()
 
-hist(mujeres, col = "grey87", ylim=c(1,8), main="", yaxt="n", ylab="")
+hist(femina[,2], col = "grey87", main="", yaxt="n", ylab="", xlab="Mujeres", freq=FALSE)
+lines(density(femina[,2]),col="red",lwd=2, lty="dotted")
 axis(side=4)
 abline(v=x_feme, lty=2)
 box()
 mtext("Histogramas de velocidad de habla", font=2,side = 3, line = -3, outer = TRUE)
 
 
+
+
+
+
+
+
+# densidades de ambos grupo
+par(mfrow=c(1,1))
+plot(function(distr_femina)dnorm(distr_femina,x_feme,desv_femina), 10,18, col="red", ylab="densidad", xlab="", ylim=c(0,0.3))
+plot(function(distr_machit)dnorm(distr_machit,x_masc,desv_machit), 10,18, add=TRUE, col="blue",ylim=c(0,0.3))
+
+
+
+lines(density(femina[,2]),col="red",lwd=2, ylim=c(0,0.3), lty="dotted")
+
+lines(density(machit[,2]),col="blue",lwd=2, ylim=c(0,0.3),lty="dotted")
+
+
+
+
 # tamaño muestral = 40
+
 # variable cualitativa nominal sexo = 20 hombres, 20 mujeres
+
 # variable cuantitativa continua: velocidad en fonemas por segundo
 
+
+
 # La duración se ve afectada por (dependiente) la variable sexo (independiente).
+
 # Variable dependiente: velocidad de habla expresada en sílabas por segundo
+
 # Variable independiente: sexo
 
+
+
 # t.test
+
 ttest = t.test (hombres,mujeres)
+
 names(ttest)
+
 ttest$statistic
