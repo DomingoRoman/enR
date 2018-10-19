@@ -1,10 +1,5 @@
 # En R
-
-
-
 # Lee datos de la web
-
-
 
 data <- read.csv("http://domingo-roman.net/velocidad.csv")
 data
@@ -16,32 +11,20 @@ desv <- sd(data[,2])
 
 str(data)
 
-
-
 # obtiene los dos grupos 
 
 
 
 femina <- data[data$sex=="f",]
-
 n_femina <- nrow(femina)
-
 machit <- data[data$sex=="h",]
-
 n_machit <- nrow(machit)
 
 
-
-
-
 x_feme <- mean(femina[,2])
-
 x_masc <- mean(machit[,2])
 
-
-
 desv_machit <- sd(machit[,2])
-
 desv_femina <- sd(femina[,2])
 
 xs <- c(x_masc,x_feme)
@@ -50,20 +33,10 @@ xs <- c(x_masc,x_feme)
 
 # Gráficos:
 
-
-
-
-
 # 0- Histograma de los dos grupos
 
-
-
-
-
 par(mfrow=c(1,1))
-
 x=rnorm(ndatos,x_datos,desv )
-
 hist(data[,2], freq=FALSE, xlim=c(10,18), ylim=c(0,0.3), col ="palegoldenrod", ylab="",xlab="", main="Histograma de velocidad y distribucion normal")
 
 #alternativo
