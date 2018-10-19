@@ -1,339 +1,155 @@
-# En R
-# Lee datos de la web
-
 data <- read.csv("http://domingo-roman.net/velocidad.csv")
-data
 ndatos <- nrow(data)
-
 x_datos <- mean(data[,2])
-
 desv <- sd(data[,2])
+# str(data)
 
-str(data)
-
-# obtiene los dos grupos 
-
-
-
+# obtiene los dos grupos y el número de elementos
 femina <- data[data$sex=="f",]
 n_femina <- nrow(femina)
+
 machit <- data[data$sex=="h",]
 n_machit <- nrow(machit)
 
-
+# Promedios y desviación típica
 x_feme <- mean(femina[,2])
 x_masc <- mean(machit[,2])
-
 desv_machit <- sd(machit[,2])
 desv_femina <- sd(femina[,2])
 
-xs <- c(x_masc,x_feme)
 
+# vector con los promedios de los dos grupos
+xs <- c(x_masc,x_feme)
 
 
 # Gráficos:
 
-# 0- Histograma de los dos grupos
+# 1. Histograma de todos los datos reunidos los dos grupos
 
 par(mfrow=c(1,1))
-x=rnorm(ndatos,x_datos,desv )
+
+x=rnorm(ndatos,x_datos,desv)
 hist(data[,2], freq=FALSE, xlim=c(10,18), ylim=c(0,0.3), col ="palegoldenrod", ylab="",xlab="", main="Histograma de velocidad y distribucion normal")
-
-#alternativo
-hist(data[,2], xlim=c(10,18), col ="palegoldenrod", ylab="",xlab="", main="Histograma de velocidad y distribucion normal")
 plot(function(x)dnorm(x,x_datos,desv), 10,18, add=TRUE, col="blue")
-
-abline(v=x_datos, col ="red")
-
+abline(v=x_datos, col ="red", lty=2)
 box()
 
 
 
+# 1. alternativo
+
+hist(data[,2], xlim=c(10,18), col ="palegoldenrod",xlab="", main="Histograma de velocidad", ylab="Velocidad f/seg")
+box()
 
 
-
-
-
-
-
-
-
-
-## 1. Boxplot para ambos grupos. Incluye la marca del promedio y una línea
-
-## que une cada uno de los promedios
-
-
-
+# 2. Boxplot para ambos grupos. Incluye la marca del promedio y una línea
+# que une cada uno de los promedios
 par(mfrow=c(1,1))
-
-boxplot(machit[,2], femina[,2], main ="Velocidad (fonemas/segundo)", col = c("grey44","grey87"), xlab="Sexo",ylab="Fonemas/seg",xaxt="n")
-
+boxplot(machit[,2], femina[,2], main ="Diagrama de cajas de la velocidad en cada grupo", col = c("grey44","grey87"), xlab="Sexo",ylab="Fonemas/seg",xaxt="n")
 axis(1, at = c(1:2), cex.axis=1, labels=c("Hombres", "Mujeres"))
-
 par(new=T)
-
 points((xs), col ="blue",type="o", lty=2, lwd= 0.4, pch="X")
 
-
-
 # Pausar aquí
-
 ####################################
-
 # Continuar desde aquí
 
 
-
-
-
-## 2. Histogramas de los dos grupos (separados; sin densidad)
-
-
-
+# 3. Histogramas de los dos grupos (separados; sin densidad)
 par(mfrow=c(1,2))
 
-
-
 hist(machit[,2], col = "grey44", ylim=c(1,8), main="", ylab="Frecuencia", xlab="Hombres")
-
 abline(v=x_masc, lty=2)
-
 box()
 
-
-
 hist(femina[,2], col = "grey87", ylim=c(1,8), main="", yaxt="n", ylab="", xlab="Mujeres")
-
 axis(side=4)
-
 abline(v=x_feme, lty=2)
 
 box()
-
-
-
 mtext("Histogramas de velocidad de habla", font=2,side = 3, line = -3, outer = TRUE)
 
 
-
-############
-
-
-
-# Histogramas con curvas de distribución normal
-
-
-
+# 4. Histogramas con curvas de distribución normal
 par(mfrow=c(1,2))
-
-
-
 distr_machit=rnorm(n_machit,x_masc,desv_machit)
-
 hist(machit[,2], col = "grey44", main="", ylab="Frecuencia", xlab="Hombres", freq=FALSE, xlim=c(10,18), ylim=c(0.025,0.5))
-
 abline(v=x_masc, lty=2)
-
 machit_norm=rnorm(machit,x_datos,desv)
-
 plot(function(distr_machit)dnorm(distr_machit,x_masc,desv_machit), 10,18, add=TRUE, col="blue")
-
 box()
-
-
 
 distr_femina=rnorm(n_femina,x_feme,desv_femina )
-
 hist(femina[,2], col = "grey87", main="", yaxt="n", ylab="", xlab="Mujeres",freq=FALSE, xlim=c(10,18), ylim=c(0.025,0.5))
-
 axis(side=4)
-
 plot(function(distr_femina)dnorm(distr_femina,x_feme,desv_femina), 10,18, add=TRUE, col="red")
-
 abline(v=x_feme, lty=2)
-
 box()
-
-
 
 mtext("Histogramas de velocidad de habla con distribucion normal", font=2,side = 3, line = -3, outer = TRUE)
-
-
-
-
-
-#### Histogramas con curvas de distribución normal real y teórica
-
-
+# 5. Histogramas con curvas de distribución normal real y teórica
 
 par(mfrow=c(1,2))
-
-
-
 distr_machit=rnorm(n_machit,x_masc,desv_machit)
-
 hist(machit[,2], col = "grey44", main="", ylab="Frecuencia", xlab="Hombres", freq=FALSE, xlim=c(10,18), ylim=c(0.025,0.5))
-
 abline(v=x_masc, lty=2)
-
 machit_norm=rnorm(machit,x_datos,desv)
-
 plot(function(distr_machit)dnorm(distr_machit,x_masc,desv_machit), 10,18, add=TRUE, col="blue",lwd=2,)
-
 lines(density(machit[,2]),col="blue",lwd=2, ylim=c(0,0.3),lty="dotted")
-
 box()
-
-
 
 distr_femina=rnorm(n_femina,x_feme,desv_femina )
-
 hist(femina[,2], col = "grey87", main="", yaxt="n", ylab="", xlab="Mujeres",freq=FALSE, xlim=c(10,18), ylim=c(0.025,0.5))
-
 axis(side=4)
-
 plot(function(distr_femina)dnorm(distr_femina,x_feme,desv_femina), 10,18, add=TRUE, col="red",lwd=2,)
-
 abline(v=x_feme, lty=2)
-
 lines(density(femina[,2]),col="red",lwd=2, ylim=c(0,0.3), lty="dotted")
-
 box()
-
-
-
 mtext("Histogramas de velocidad + distribucion real y teorica", font=2,side = 3, line = -3, outer = TRUE)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# densidades de ambos grupos
-
-### teóricas
+# 6. densidades teóricas de ambos grupos
 
 par(mfrow=c(1,1))
-
 plot(function(distr_femina)dnorm(distr_femina,x_feme,desv_femina), 10,18, col="red", lty="dotted", ylab="densidad", ylim=c(0,0.3), xlab="Mujeres y hombres", main="Curvas de distribuciones normales teoricas")
+
 
 plot(function(distr_machit)dnorm(distr_machit,x_masc,desv_machit), 10,18, col="blue",ylim=c(0,0.3),lty="dotted",ylab=",", xlab="",yaxt="n", add=TRUE)
 
-
-
-
-
-### reales
-
+# 7. densidades reales de ambos grupos
 par(mfrow=c(1,1))
-
-plot.new()
-
-
 plot(density(machit[,2]),col="blue", ylim=c(0,0.3),lty="dotted", main="Curvas de distribucion reales", xlab="")
 
 lines(density(femina[,2]),col="red", ylim=c(0,0.3),lty="dotted", main="", xlab="")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-########
-
-
+# 8. Distribuciones reales y teóricas para ambos grupos
 
 par(mfrow=c(1,2))
-
 plot(function(distr_femina)dnorm(distr_femina,x_feme,desv_femina), 10,18, col="red", ylab="densidad", ylim=c(0,0.3), xlab="Mujeres")
-
 lines(density(femina[,2]),col="red",lwd=2, ylim=c(0,0.3), lty="dotted")
-
-
 
 plot(function(distr_machit)dnorm(distr_machit,x_masc,desv_machit), 10,18, col="blue",ylim=c(0,0.3),ylab=",", xlab="Hombres",yaxt="n")
 
 lines(density(machit[,2]),col="blue",lwd=2, ylim=c(0,0.3),lty="dotted")
-
 axis(side=4)
-
 mtext("Curvas de distribucion normal teorica y real", font=2,side = 3, line = -3, outer = TRUE)
 
 
-
-
-
-
+# 9. Ploteo de todos los valores de ambos grupos
+par(mfrow=c(1,1))
+plot(sort(machit$vel), col= "blue", ylim=c(11,16), ylab="", xlab="")
+par(new=T)
+plot(sort(femina$vel), col= "red", ylim=c(11,16), ylab="", xlab="")
 
 # tamaño muestral = 40
-
-
-
 # variable cualitativa nominal sexo = 20 hombres, 20 mujeres
-
-
-
 # variable cuantitativa continua: velocidad en fonemas por segundo
 
-
-
-
-
-
-
 # La duración se ve afectada por (dependiente) la variable sexo (independiente).
-
-
-
 # Variable dependiente: velocidad de habla expresada en sílabas por segundo
-
-
-
 # Variable independiente: sexo
 
-
-
-
-
-
-
 # t.test
-
-
-
-ttest = t.test (hombres,mujeres)
-
-
-
+ttest = t.test (machit$vel,femina$vel)
 names(ttest)
-
-
-
 ttest$statistic
+
