@@ -1,0 +1,47 @@
+data <- read.csv ('seiscasos.csv')
+hist(data[,3], main="Histograma de la duración vocálica",xlab="Duración (ms)",ylab="Frecuencias", col="green",sub="(Todas las vocales)")
+
+hist(data[,4], main="Histograma del número de ciclos",xlab="Número de ciclos en cada vocal",ylab="Frecuencias", col="red",sub="(Todas las vocales)")
+
+hist(data[,5], main="Histograma del duración / ciclos",xlab="Razón duración / n de ciclos",ylab="Frecuencias", col="maroon",sub="(Todas las vocales)")
+
+data[data$cat=='A',]$dur -> Átonas
+data[data$cat=='T',]$dur -> Tónicas
+barplot(c(mean(Átonas), mean(Tónicas)))
+
+d <- data.frame(Atonas=Átonas, Tónicas=Tónicas)
+boxplot(d)
+
+barplot(c(mean(A),mean(e),mean(i),mean(o), mean(u)))
+
+data[data$cat=='A',]$ciclos -> Ciclos_átonas
+data[data$cat=='T',]$ciclos -> Ciclos_tónicas
+barplot(c(mean(Ciclos_átonas), mean(Ciclos_átonas)))
+
+data[data$cat=='A',]$ciclosDur -> Ciclos_dur_átonas
+data[data$cat=='T',]$ciclosDur -> Ciclos_dur_tónicas
+barplot(c(mean(Ciclos_dur_átonas), mean(Ciclos_dur_átonas)))
+
+data[data$text=='a',]$dur -> A_dur
+data[data$text=='e',]$dur -> E_dur
+data[data$text=='i',]$dur -> I_dur
+data[data$text=='o',]$dur -> O_dur
+data[data$text=='u',]$dur -> U_dur
+
+
+
+toda_a <- subset(data,text=='a')
+toda_e <- subset(data,text=='e')
+toda_i <- subset(data,text=='i')
+toda_o <- subset(data,text=='o')
+toda_u <- subset(data,text=='u')
+
+barplot(c(mean(toda_a[,3]), mean(toda_e[,3]), mean(toda_i[,3]), mean(toda_o[,3]), mean(toda_u[,3])))
+barplot(c(mean(toda_a[,4]), mean(toda_e[,4]), mean(toda_i[,4]), mean(toda_o[,4]), mean(toda_u[,4])))
+barplot(c(mean(toda_a[,5]), mean(toda_e[,5]), mean(toda_i[,5]), mean(toda_o[,5]), mean(toda_u[,5])))
+
+toda_a_T <- subset(toda_a,car=='T')
+toda_e_T <- subset(toda_e,cat=='T')
+toda_i_T <- subset(toda_i,cat=='T')
+toda_o_T <- subset(toda_o,cat=='T')
+toda_u_T <- subset(toda_u,cat=='T')
