@@ -1,3 +1,4 @@
+
 # CASA
 setwd("/Users/historiadores/Documents/Domingo/2018/fonet_1_2018")
 
@@ -95,6 +96,8 @@ n_ao_total <- nrow(ao_total)
 respuestas_frecuentes <- c(n_ea_total, n_oa_total, n_ou_total, n_ei_total, n_ae_total, n_ao_total)
 par(mfrow=c(1,1))
 barplot(respuestas_frecuentes)
+box()
+# falta ordenar leyenda del eje x
 
 
 par(mfrow=c(2,4))
@@ -106,3 +109,88 @@ barplot(cantidad_ei, main="ei > ei --- ae")
 barplot(cantidad_ie , main="ie > ie --- ea  --- ia" )
 barplot(cantidad_ou, main="ou > ou --- ao")
 barplot(cantidad_uo, main="uo > uo --- oa")
+
+
+# reactionTime
+
+
+
+par(mfrow=c(1,1))
+plot(sort(data_ai_ai[,5]), ylim=c (1,6),xlim=c(1,6), col="red", ylab="", xlab="")
+par(new=T)
+plot(sort(data_ai_ae[,5]), ylim=c (1,6),xlim=c(1,8), col="blue", ylab="", xlab="")
+
+
+par(mfrow=c(2,2))
+boxplot(data_ai_ai[,5], ylim=c (1,6), main= "AI = AI")
+boxplot(data_ai_ae[,5], ylim=c (1,6), main= "AI = AE")
+boxplot(data_au_au[,5], ylim=c (1,6), main= "AU = AU")
+boxplot(data_au_ao[,5], ylim=c (1,6), main= "AU = AO")
+
+
+boxplot(data_ia_ea[,5], ylim=c (1,6), main= "IA = EA") 
+boxplot(data_ia_ia[,5], ylim=c (1,6), main= "IA = IA")
+boxplot(data_ua_ua[,5], ylim=c (1,6), main= "UA = UA")
+boxplot(data_ua_oa[,5], ylim=c (1,6), main= "UA = OA")
+boxplot(data_ou_ou[,5], ylim=c (1,6), main= "OU = OU")
+boxplot(data_ou_ao[,5], ylim=c (1,6), main= "OU = AO")
+boxplot(data_uo_uo[,5], ylim=c (1,12), main= "UO = UO")
+boxplot(data_uo_oa[,5], ylim=c (1,12), main= "UO = OA")
+
+boxplot(data_ei_ei[,5], ylim=c (1,6), main= "EI = EI")
+boxplot(data_ei_ae[,5], ylim=c (1,6), main= "EI = AE")
+boxplot(data_ie_ie[,5], ylim=c (1,6), main= "IE = IE")
+boxplot(data_ie_ea[,5], ylim=c (1,6), main= "IE = EA")
+boxplot(data_ie_ia[,5], ylim=c (1,6), main= "IE = IA")
+
+
+# promedios de tiempos de reacción
+par(mfrow=c(1,1))
+x_data_ai_ai <- mean(data_ai_ai[,5])
+x_data_ai_ae <- mean(data_ai_ae[,5])
+x_data_au_au <- mean(data_au_au[,5])
+x_data_au_ao <- mean(data_au_ao[,5])
+x_data_ia_ea <- mean(data_ia_ea[,5])
+x_data_ia_ia <- mean(data_ia_ia[,5])
+x_data_ua_ua <- mean(data_ua_ua[,5])
+x_data_ua_oa <- mean(data_ua_oa[,5])
+x_data_ei_ei <- mean(data_ei_ei[,5])
+x_data_ei_ae <- mean(data_ei_ae[,5])
+x_data_ie_ie <- mean(data_ie_ie[,5])
+x_data_ie_ea <- mean(data_ie_ea[,5])
+x_data_ie_ia <- mean(data_ie_ia[,5])
+x_data_ou_ou <- mean(data_ou_ou[,5])
+x_data_ou_ao <- mean(data_ou_ao[,5])
+x_data_uo_uo <- mean(data_uo_uo[,5])
+x_data_uo_oa <- mean(data_uo_oa[,5])
+
+
+promedios_t_rec <- c(x_data_ai_ai, x_data_ai_ae, x_data_au_au, x_data_au_ao, x_data_ia_ea, x_data_ia_ia, x_data_ua_ua, x_data_ua_oa, x_data_ei_ei, x_data_ei_ae, x_data_ie_ie, x_data_ie_ea, x_data_ie_ia, x_data_ou_ou, x_data_ou_ao, x_data_uo_uo, x_data_uo_oa)
+
+barplot(promedios_t_rec, ylim=c(0,6))
+
+
+
+
+# camilo
+
+
+library(ggplot2)
+data <- read.csv("allResults.csv")
+ene <- nrow(data)
+str(data)
+lis=1:ene
+lista2=c()
+
+for(i in lis) {
+ c=data[i,]
+ d=c[,2]
+ e=c[,3]
+ id=(as.character(d)==as.character(e))
+ print(id)
+ lista2=append(lista2, id)
+ }
+data2=cbind(data, lista2)
+p=ggplot(data2, aes(x=reactionTime, fill=lista2)) + geom_bar(position="dodge")
+p
+
