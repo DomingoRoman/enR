@@ -1,0 +1,76 @@
+setwd("/Users/historiadores/Documents/Domingo/2018/fonet_1_2018")
+data <- read.csv("allResults.csv")
+str(data)
+summary(data)
+
+# subdivision del dataframe
+data_ai <- data[data$stimulus == "ai",]
+data_au <- data[data$stimulus == "au",]
+data_ia <- data[data$stimulus == "ia",]
+data_ua <- data[data$stimulus == "ua",]
+data_ei <- data[data$stimulus == "ei",]
+data_ie <- data[data$stimulus == "ie",]
+data_ou <- data[data$stimulus == "ou",]
+data_uo <- data[data$stimulus == "uo",]
+
+
+
+## subsubdivisión del dataframe
+data_ai_ai <- data_ai[data_ai$response=="ai",]
+data_ai_ae <- data_ai[data_ai$response=="ae",]
+data_au_au <- data_au[data_au$response=="au",]
+data_au_ao <- data_au[data_au$response=="ao",]
+data_ia_ea <- data_ia[data_ia$response == "ea",]
+data_ua_ua <- data_ua[data_ua$response == "ua",]
+data_ua_oa <- data_ua[data_ua$response == "oa",]
+data_ei_ei <- data_ei[data_ei$response == "ei",]
+data_ei_ae <- data_ei[data_ei$response == "ae",]
+data_ie_ie <- data_ie[data_ie$response == "ie",]
+data_ie_ea <- data_ie[data_ie$response == "ea",]
+data_ie_ia <- data_ie[data_ie$response == "ia",]
+data_ou_ou <- data_ou[data_ou$response == "ou",]
+data_ou_ao <- data_ou[data_ou$response == "ao",]
+data_uo_uo <- data_uo[data_uo$response == "uo",]
+data_uo_oa <- data_uo[data_uo$response == "oa",]
+
+
+n_data_ai_ai <- nrow(data_ai_ai)
+n_data_ai_ae  <- nrow(data_ai_ae)
+n_data_au_au <- nrow(data_au_au)
+n_data_au_ao <- nrow(data_au_ao)
+n_data_ia_ea  <- nrow(data_ia_ea)
+n_data_ia_ia  <- nrow(data_ia_ia)
+n_data_ua_ua <- nrow(data_ua_ua)
+n_data_ua_oa  <- nrow(data_ua_oa)
+n_data_ei_ei <- nrow(data_ei_ei)
+n_data_ei_ae  <- nrow(data_ei_ae)
+n_data_ie_ie  <- nrow(data_ie_ie)
+n_data_ie_ea  <- nrow(data_ie_ea)
+n_data_ie_ia  <- nrow(data_ie_ia)
+n_data_ou_ou <- nrow(data_ou_ou)
+n_data_ou_ao <- nrow(data_ou_ao)
+n_data_uo_uo <- nrow(data_uo_uo)
+n_data_ou_ao <- nrow(data_ou_ao)
+n_data_uo_uo <- nrow(data_uo_uo)
+n_data_uo_oa <- nrow(data_uo_oa)
+
+cantidad_ai <- c(n_data_ai_ai,n_data_ai_ae)
+cantidad_au <- c(n_data_au_au, n_data_au_ao)
+cantidad_ia<- c(n_data_ia_ia, n_data_ia_ea)
+cantidad_ua <- c(n_data_ua_ua, n_data_ua_oa)
+cantidad_ei <- c(n_data_ei_ei, n_data_ei_ae)
+cantidad_ie <- c(n_data_ie_ie , n_data_ie_ea ,n_data_ie_ia)
+cantidad_ou <- c(n_data_ou_ou , n_data_ou_ao)
+cantidad_uo <- c(n_data_uo_uo, n_data_uo_oa)
+
+
+par(mfrow=c(2,4))
+barplot(cantidad_ai, main="ai > ai / ai > ae")
+barplot(cantidad_au, main="au > au / au > ao")
+barplot(cantidad_ia, main="ia > ia / ia > ea")
+barplot(cantidad_ua, main="ua > ua / ua > oa")
+
+barplot(cantidad_ei, main="ei > ei / ei > ae")
+barplot(cantidad_ie , main="ie > ie / ie> ea / ie > ia" )
+barplot(cantidad_ou, main="ou> ou / ou > ao")
+barplot(cantidad_uo, main="uo > uo / uo > oa")
