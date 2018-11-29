@@ -1,7 +1,16 @@
+# CASA
 setwd("/Users/historiadores/Documents/Domingo/2018/fonet_1_2018")
+
+# LAB
+setwd("/Users/imac/Desktop/percepcion/resultados")
+
 data <- read.csv("allResults.csv")
+
+
 str(data)
 summary(data)
+
+
 
 # subdivision del dataframe
 data_ai <- data[data$stimulus == "ai",]
@@ -13,14 +22,13 @@ data_ie <- data[data$stimulus == "ie",]
 data_ou <- data[data$stimulus == "ou",]
 data_uo <- data[data$stimulus == "uo",]
 
-
-
-## subsubdivisión del dataframe
+## subsubdivisión del dataframe por respuestas
 data_ai_ai <- data_ai[data_ai$response=="ai",]
 data_ai_ae <- data_ai[data_ai$response=="ae",]
 data_au_au <- data_au[data_au$response=="au",]
 data_au_ao <- data_au[data_au$response=="ao",]
 data_ia_ea <- data_ia[data_ia$response == "ea",]
+data_ia_ia <- data_ia[data_ia$response == "ia",]
 data_ua_ua <- data_ua[data_ua$response == "ua",]
 data_ua_oa <- data_ua[data_ua$response == "oa",]
 data_ei_ei <- data_ei[data_ei$response == "ei",]
@@ -33,20 +41,20 @@ data_ou_ao <- data_ou[data_ou$response == "ao",]
 data_uo_uo <- data_uo[data_uo$response == "uo",]
 data_uo_oa <- data_uo[data_uo$response == "oa",]
 
-
+# Cuenta cada caso
 n_data_ai_ai <- nrow(data_ai_ai)
-n_data_ai_ae  <- nrow(data_ai_ae)
+n_data_ai_ae <- nrow(data_ai_ae)
 n_data_au_au <- nrow(data_au_au)
 n_data_au_ao <- nrow(data_au_ao)
-n_data_ia_ea  <- nrow(data_ia_ea)
-n_data_ia_ia  <- nrow(data_ia_ia)
+n_data_ia_ea <- nrow(data_ia_ea)
+n_data_ia_ia <- nrow(data_ia_ia)
 n_data_ua_ua <- nrow(data_ua_ua)
-n_data_ua_oa  <- nrow(data_ua_oa)
+n_data_ua_oa <- nrow(data_ua_oa)
 n_data_ei_ei <- nrow(data_ei_ei)
-n_data_ei_ae  <- nrow(data_ei_ae)
-n_data_ie_ie  <- nrow(data_ie_ie)
-n_data_ie_ea  <- nrow(data_ie_ea)
-n_data_ie_ia  <- nrow(data_ie_ia)
+n_data_ei_ae <- nrow(data_ei_ae)
+n_data_ie_ie <- nrow(data_ie_ie)
+n_data_ie_ea <- nrow(data_ie_ea)
+n_data_ie_ia <- nrow(data_ie_ia)
 n_data_ou_ou <- nrow(data_ou_ou)
 n_data_ou_ao <- nrow(data_ou_ao)
 n_data_uo_uo <- nrow(data_uo_uo)
@@ -54,6 +62,8 @@ n_data_ou_ao <- nrow(data_ou_ao)
 n_data_uo_uo <- nrow(data_uo_uo)
 n_data_uo_oa <- nrow(data_uo_oa)
 
+
+# vector para cada estímulo
 cantidad_ai <- c(n_data_ai_ai,n_data_ai_ae)
 cantidad_au <- c(n_data_au_au, n_data_au_ao)
 cantidad_ia<- c(n_data_ia_ia, n_data_ia_ea)
@@ -64,13 +74,35 @@ cantidad_ou <- c(n_data_ou_ou , n_data_ou_ao)
 cantidad_uo <- c(n_data_uo_uo, n_data_uo_oa)
 
 
-par(mfrow=c(2,4))
-barplot(cantidad_ai, main="ai > ai / ai > ae")
-barplot(cantidad_au, main="au > au / au > ao")
-barplot(cantidad_ia, main="ia > ia / ia > ea")
-barplot(cantidad_ua, main="ua > ua / ua > oa")
+# Pregunta ¿Qué se respondió más?
+ea_total <- data[data$response == "ea",]
+oa_total <- data[data$response == "oa",]
+ou_total <- data[data$response == "ou",]
+ei_total <- data[data$response == "ei",]
+ae_total <- data[data$response == "ae",]
+ao_total <- data[data$response == "ao",]
 
-barplot(cantidad_ei, main="ei > ei / ei > ae")
-barplot(cantidad_ie , main="ie > ie / ie> ea / ie > ia" )
-barplot(cantidad_ou, main="ou> ou / ou > ao")
-barplot(cantidad_uo, main="uo > uo / uo > oa")
+
+n_ea_total <- nrow(ea_total)
+n_oa_total <- nrow(oa_total)
+n_ou_total <- nrow(ou_total)
+n_ei_total <- nrow(ei_total)
+n_ae_total <- nrow(ae_total)
+n_ao_total <- nrow(ao_total)
+
+# Vector para cada respuesta
+
+respuestas_frecuentes <- c(n_ea_total, n_oa_total, n_ou_total, n_ei_total, n_ae_total, n_ao_total)
+par(mfrow=c(1,1))
+barplot(respuestas_frecuentes)
+
+
+par(mfrow=c(2,4))
+barplot(cantidad_ai, main="ai > ai --- ae")
+barplot(cantidad_au, main="au > au --- ao")
+barplot(cantidad_ia, main="ia > ia --- ea")
+barplot(cantidad_ua, main="ua > ua --- oa")
+barplot(cantidad_ei, main="ei > ei --- ae")
+barplot(cantidad_ie , main="ie > ie --- ea  --- ia" )
+barplot(cantidad_ou, main="ou > ou --- ao")
+barplot(cantidad_uo, main="uo > uo --- oa")
