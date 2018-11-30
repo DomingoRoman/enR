@@ -5,6 +5,9 @@ setwd("/Users/historiadores/Documents/Domingo/2018/fonet_1_2018")
 # LAB
 setwd("/Users/imac/Desktop/percepcion/resultados")
 
+# LAB
+setwd("/Users/imac/Desktop/percepcion/resultados")
+
 data <- read.csv("allResults.csv")
 
 
@@ -168,6 +171,45 @@ x_data_uo_oa <- mean(data_uo_oa[,5])
 promedios_t_rec <- c(x_data_ai_ai, x_data_ai_ae, x_data_au_au, x_data_au_ao, x_data_ia_ea, x_data_ia_ia, x_data_ua_ua, x_data_ua_oa, x_data_ei_ei, x_data_ei_ae, x_data_ie_ie, x_data_ie_ea, x_data_ie_ia, x_data_ou_ou, x_data_ou_ao, x_data_uo_uo, x_data_uo_oa)
 
 barplot(promedios_t_rec, ylim=c(0,6))
+
+
+
+# promedios congruentes e incongruentes
+
+promedios_t_rec_congr <- c(x_data_ai_ai, x_data_au_au, x_data_ia_ia, x_data_ua_ua, x_data_ei_ei, x_data_ie_ie, x_data_ou_ou, x_data_uo_uo)
+
+promedios_t_rec_incongr <- c(x_data_ai_ae, x_data_au_ao, x_data_ia_ea, x_data_ua_oa, x_data_ei_ae, x_data_ie_ea, x_data_ie_ia, x_data_ou_ao, x_data_uo_oa)
+
+
+
+promedios_t_rec_congr_menos_NAN <- c(x_data_ai_ai, x_data_au_au, x_data_ua_ua, x_data_ei_ei, x_data_ie_ie, x_data_ou_ou, x_data_uo_uo)
+
+x_congr <- mean(promedios_t_rec_congr_menos_NAN)
+x_incongr <- mean(promedios_t_rec_incongr)
+x_congr
+x_incongr
+promedios_t_generales <- c(x_congr, x_incongr)
+barplot(promedios_t_generales, ylim = c(0,5))
+box()
+
+par(mfrow=c(1,2))
+barplot(promedios_t_rec_congr, ylim=c(0,6))
+barplot(promedios_t_rec_incongr, ylim=c(0,6))
+
+par(mfrow=c(1,1))
+boxplot(promedios_t_rec_congr, promedios_t_rec_incongr, col ="red")
+
+
+# t.test
+ttest = t.test (machit$responseTime,femina$responseTime)
+names(ttest)
+ttest$statistic
+barplot(promedios_t_rec, ylim=c(0,6))
+
+
+
+
+
 
 
 
